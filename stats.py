@@ -1,19 +1,23 @@
-def get_num_words(path_to_file):
-    with open(path_to_file) as file:
-        file_contents = file.read()
-        words = file_contents.split()
-        num_words = len(words)
-        print(f"{num_words} words found in the document")
+def get_num_words(text):
+        words = text.split()
+        return len(words)
         
-def get_num_letters(path_to_file):
-    with open(path_to_file) as file:
-        file_contents = file.read()
-        
-        countAlpha = {}
-        
-        for letter in file_contents:
-            for char in letter:
-                countAlpha.setdefault(char.lower(), 0)
-                countAlpha[char.lower()] += 1
-        
-        print(countAlpha)
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
+        else:
+            chars[lowered] = 1
+    return chars
+
+def sort_on(d):
+    return d["num"]
+
+def chars_dict_to_sorted_list(num_chars_dict):
+    sorted_list = []
+    for key in num_chars_dict:
+        sorted_list.append({"char": key, "num": num_chars_dict[key]})
+    sorted_list.sort(key=sort_on, reverse=True)
+    return sorted_list
